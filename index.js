@@ -10,9 +10,6 @@ app.use(bodyParser.json())
 
 const PORT = process.env.PORT || 5400;
 
-app.get('/', (req, res) => {
-    res.send("Hii there ")
-})
 
 app.post('/search', (req, res) => {
     const link = req.body.url;
