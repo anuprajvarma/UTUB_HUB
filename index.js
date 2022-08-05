@@ -8,6 +8,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+const PORT = process.env.PORT || 5400;
+
 app.get('/', (req, res) => {
     res.send("Hii there ")
 })
@@ -20,6 +22,10 @@ app.post('/search', (req, res) => {
     video.pipe(fs.createWriteStream('myvideo.mp4'))
 })
 
-app.listen(5400, () => {
-    console.log("server is started on 5400")
+if (process.env.NODE_ENV = "production") {
+    app.use(express.static("client/build"));
+}
+
+app.listen(PORT, () => {
+    console.log(`server is started on ${PORT}`)
 })
