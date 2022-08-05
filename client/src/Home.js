@@ -19,7 +19,7 @@ const Home = () => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        axios.post('/search', { url })
+        axios.post('https://utbdl.herokuapp.com/search', { url })
     }
 
 
