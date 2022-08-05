@@ -1,21 +1,21 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const fs = require('fs')
-const youtubedl = require('youtube-dl')
+const youtubedl = require('youtube-dl-exec');
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.send("Hii there ")
 })
 
 app.post('/search', (req, res) => {
-    const video = youtubedl('http://www.youtube.com/watch?v=90AiXO1pAiA')
-
-    video.on('info', function (info) {
-        console.log('Download started')
-        console.log('filename: ' + info._filename)
-        console.log('size: ' + info.size)
-    })
+    const link = req.body.url;
+    console.log(link)
+    const video = youtubedl(link)
 
     video.pipe(fs.createWriteStream('myvideo.mp4'))
 })
