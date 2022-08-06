@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5400;
 
 app.post('/search', (req, res) => {
     const link = req.body.url;
