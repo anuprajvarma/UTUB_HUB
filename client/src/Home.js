@@ -5,7 +5,6 @@ import Footer from './footer'
 import './nav.css'
 
 const Home = () => {
-
     const [url, setUrl] = useState();
 
 
@@ -18,8 +17,8 @@ const Home = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-
         await axios.post('/search', { url });
+        axios.post('https://utbdl.herokuapp.com/search', { url })
     }
 
     return (
