@@ -19,13 +19,17 @@ app.post('/search', (req, res) => {
 
     var stream = fs.createWriteStream('myvideo.mp4');
 
-    video.stderr.pipe(stream);
+    video.pipe(stream);
+})
+
+app.get('/test', (req, res) => {
+    res.send('API is running....')
+
 })
 
 // --------- deployment ---------- 
 
 
-__dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(`client/build`));
 
