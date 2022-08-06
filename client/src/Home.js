@@ -16,12 +16,11 @@ const Home = () => {
 
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        axios.post('/search', { url })
+        await axios.post('/search', { url });
     }
-
 
     return (
         <div className='home-div'>
