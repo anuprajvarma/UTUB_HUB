@@ -10,7 +10,7 @@ const SocketProvider = ({ children }) => {
     const [socket, setSocket] = useState(null)
 
     useEffect(() => {
-        setSocket(io("http://localhost:5000"));
+        setSocket(io("http://localhost:5327"));
 
 
     }, []);
@@ -20,7 +20,7 @@ const SocketProvider = ({ children }) => {
     // }
     const handleSocketDownloadFinish = async ({ file }) => {
         console.log('download finished');
-        const response = await axios.get(`http://localhost:5000/download/${file}`, {
+        const response = await axios.get(`http://localhost:5327/download/${file}`, {
             responseType: "blob",
         })
 

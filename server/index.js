@@ -8,7 +8,6 @@ require('dotenv').config();
 const http = require('http')
 const cors = require('cors');
 const { Server } = require('socket.io');
-const { SocketAddress } = require('net');
 
 
 const app = express();
@@ -39,14 +38,6 @@ app.get('/test', (req, res) => {
     res.send('API is running....')
 
 })
-
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build/"));
-
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
-}
 
 // --------- deployment ---------- 
 
@@ -83,6 +74,7 @@ io.on('connect', (client) => {
                 io.sockets.emit('receive-download-finished', { file })
             })
             .on("ready", () => {
+                io.sockets.emit('Download started', { value: false })
                 console.log("Download started");
             })
             .on("error", (error) => {
