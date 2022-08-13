@@ -23,7 +23,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5327;
 
 app.get(
     "/download/:file",
@@ -39,6 +39,14 @@ app.get('/test', (req, res) => {
     res.send('API is running....')
 
 })
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build/"));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
 
 // --------- deployment ---------- 
 
